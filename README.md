@@ -1,1 +1,79 @@
-# spin-wheel-2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spin Wheel</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f9f9f9;
+      font-family: Arial, sans-serif;
+    }
+    .wheel-container {
+      position: relative;
+    }
+    .wheel {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      border: 10px solid #333;
+      position: relative;
+      background: conic-gradient(
+        #4caf50 0% 16.66%,
+        #8bc34a 16.66% 33.33%,
+        #4caf50 33.33% 50%,
+        #8bc34a 50% 66.66%,
+        #4caf50 66.66% 83.33%,
+        #8bc34a 83.33% 100%
+      );
+      transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+    .pointer {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 30px solid red;
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #388e3c;
+    }
+  </style>
+</head>
+<body>
+  <div class="wheel-container">
+    <div class="pointer"></div>
+    <div class="wheel" id="wheel"></div>
+  </div>
+  <button onclick="spin()">Spin!</button>
+
+  <script>
+    let rotation = 0;
+    function spin() {
+      const randomDeg = Math.floor(Math.random() * 360 + 720); // At least two full spins
+      rotation += randomDeg;
+      document.getElementById('wheel').style.transform = `rotate(${rotation}deg)`;
+    }
+  </script>
+</body>
+</html>
